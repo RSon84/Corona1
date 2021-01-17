@@ -1,7 +1,8 @@
 class CoronaTestCounter::CLI
   def call
-    puts "Welcome to the Covid Test Counter"
+    puts "\nWelcome to the Covid Test Counter\n"
     get_available_states
+    list_states
     get_user_state
     #get_counts(state)
     #list_counts
@@ -58,10 +59,17 @@ class CoronaTestCounter::CLI
                   "Wisconsin",
                   "West Virginia",
                   "Wyoming"]
+                end
+  def list_states
+    #list states
+    puts 'Choose a state to see testing counts.'
+    @states.each.with_index(1) do |state, index|
+    puts "#{index}. #{state}"
+  end
+  end
 
   def get_user_state
-    #list states
-    @states.each_with_index {|index, state|
-    puts "#{index} #{state}"}
+    chosen_state = gets.strip
+    binding.pry
   end
 end
