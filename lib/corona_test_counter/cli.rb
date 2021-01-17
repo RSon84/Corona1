@@ -71,5 +71,11 @@ class CoronaTestCounter::CLI
   def get_user_state
     chosen_state = gets.strip
     binding.pry
+    if valid_input(chosen_state)
+    end
+  end
+
+  def valid_input(input, data)
+    input <= data.length && input > 0
   end
 end
