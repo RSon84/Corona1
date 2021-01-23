@@ -71,11 +71,17 @@ class CoronaTestCounter::CLI
   def get_user_state
     chosen_state = gets.strip
     binding.pry
-    if valid_input(chosen_state)
+    show_data_for(chosen_state) if valid_input(chosen_state, @states)
     end
   end
 
   def valid_input(input, data)
-    input <= data.length && input > 0
+    input.to_i <= data.length && input.to_i > 0
   end
+
+  def show_data_for(chosen_state)
+    state = @states[chosen_state - 1]
+    puts "Here are daily increases in testing for #{state}."
+
+
 end
