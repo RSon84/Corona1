@@ -82,6 +82,10 @@ class CoronaTestCounter::CLI
   def show_data_for(chosen_state)
     state = @states[chosen_state - 1]
     puts "Here are daily increases in testing for #{state}."
+    ## To implement
+    # CoronaTestCounter::Dates.all.each.with_index(1) do | date|
+    #   puts date.
+  end
 
 
 end
