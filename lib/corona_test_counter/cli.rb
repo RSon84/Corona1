@@ -63,14 +63,13 @@ class CoronaTestCounter::CLI
   def list_states
     #list states
     puts 'Choose a state to see testing counts.'
-    @states.each.with_index(1) do |state, index|
+    @states.each do |state, index|
     puts "#{index}. #{state}"
   end
   end
 
   def get_user_state
     chosen_state = gets.strip
-    binding.pry
     show_data_for(chosen_state) if valid_input(chosen_state, @states)
     end
   end
@@ -80,8 +79,9 @@ class CoronaTestCounter::CLI
   end
 
   def show_data_for(chosen_state)
-    state = @states[chosen_state - 1]
+    state = @states[chosen_state.downcase]
     puts "Here are daily increases in testing for #{state}."
+
     ## To implement
     # CoronaTestCounter::Dates.all.each.with_index(1) do | date|
     #   puts date.
