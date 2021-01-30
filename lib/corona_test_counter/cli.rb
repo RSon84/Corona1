@@ -86,6 +86,3 @@ class CoronaTestCounter::CLI
     # CoronaTestCounter::Dates.all.each.with_index(1) do | date|
     #   puts date.
   end
-
-
-end
