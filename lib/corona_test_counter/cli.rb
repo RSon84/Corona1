@@ -1,6 +1,6 @@
 class CoronaTestCounter::CLI
   def call
-    puts "\nWelcome to the Covid Test Counter\n"
+    puts "\nWelcome to the Covid Test Counter!\n".colorize(:green)
     get_available_states
     list_states
     get_user_state
@@ -36,7 +36,7 @@ class CoronaTestCounter::CLI
                   "Mississippi",
                   "Montana",
                   "North Carolina",
-                  " North Dakota",
+                  "North Dakota",
                   "Nebraska",
                   "New Hampshire",
                   "New Jersey",
@@ -62,7 +62,7 @@ class CoronaTestCounter::CLI
                 end
   def list_states
     #list states
-    puts 'Choose a state to see testing counts.'
+    puts "Please type in the state as it appears for the state's data.".colorize(:yellow)
     @states.each do |state, index|
     puts "#{index}. #{state}"
   end
@@ -70,17 +70,17 @@ class CoronaTestCounter::CLI
 
   def get_user_state
     chosen_state = gets.strip
-    show_data_for(chosen_state) if valid_input(chosen_state, @states)
+    show_data_for(chosen_state) if valid_input(chosen_state)
     end
   end
 
-  def valid_input(input, data)
-    input.to_i <= data.length && input.to_i > 0
+  def valid_input(chosen_state)
+    @states.include? chosen_state
   end
 
   def show_data_for(chosen_state)
-    state = @states[chosen_state.downcase]
-    puts "Here are daily increases in testing for #{state}."
+    # state = @states[chosen_state.downcase]
+    puts "Here are daily increases in testing for #{chosen_state}.".red
 
     ## To implement
     # CoronaTestCounter::Dates.all.each.with_index(1) do | date|
