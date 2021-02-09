@@ -2,6 +2,12 @@ class CoronaTestCounter::Scraper
 
 def self.scrape_states
 
+  url = Nokogiri::HTML(open("https://covidtracking.com"))
+
+  states = url.css()
+
+def self.scrape_dates
+
 
 #if self == "alaska"
   doc = Nokogiri::HTML(open("https://covidtracking.com/data/state/alaska/tests-viral"))
