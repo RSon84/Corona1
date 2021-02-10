@@ -2,9 +2,15 @@ class CoronaTestCounter::Scraper
 
 def self.scrape_states
 
-  url = Nokogiri::HTML(open("https://covidtracking.com"))
+  url = Nokogiri::HTML(open("https://covidtracking.com/data"))
 
-  states = url.css()
+  every_state = url.css("div.b460e h3 a")
+
+  every_state.each.with_index do |e|
+    name = e.text.strip
+    CoronaTestCounter::Each_State.new(name)
+
+  every_site = url.css("div.b460e span._2ae6b a")
 
 def self.scrape_dates
 
