@@ -23,11 +23,10 @@ class CoronaTestCounter::CLI
   end
 
   def list_states
-    #list states
-    puts "Please type in the state as it appears for the state's data.".colorize(:yellow)
-    @states.each do |state, index|
-    puts "#{index}. #{state}"
-  end
+    puts 'Choose a month to see events.'
+    @states.each.with_index(1) do |state, index|
+      puts "#{state[2]}: #{state[0]}"
+    end
   end
 
   def get_user_state
@@ -36,8 +35,9 @@ class CoronaTestCounter::CLI
     end
   end
 
-  def valid_input(chosen_state)
-    @states.include? chosen_state
+  def valid_input(input)
+    codes = @states.map { |code| code[2] }
+    codes.include?(input)
   end
 
   def show_data_for(chosen_state)
