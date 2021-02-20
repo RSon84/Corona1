@@ -1,29 +1,24 @@
 class CoronaTestCounter::Scraper
-
-def self.scrape_states
-
-  url = Nokogiri::HTML(open("https://covidtracking.com/data"))
-
-  every_state = url.css("div.b460e h3 a")
-
-  every_state.each.with_index do |e|
-    name = e.text.strip
-    CoronaTestCounter::Each_State.new(name)
-
-  every_site = url.css("div.b460e span._2ae6b a")
-
-def self.scrape_dates
+  @@muted = "\e[1;31m"
+  @@grn = "\e[1;32m"
+  @@blu = "\e[1;34m"
+  @@mag = "\e[1;35m"
+  @@cyn = "\e[1;36m"
+  @@white = "\e[0m"
 
 
-#if self == "alaska"
-  doc = Nokogiri::HTML(open("https://covidtracking.com/data/state/alaska/tests-viral"))
-
-  state_date =  doc.css("div.container.ddf6f:nth-child(2) div.d3a4d table.e1fd0._4545b:nth-child(13) tbody:nth-child(2) tr:nth-child(1) td.b6f76._4c288:nth-child(1) > span.e0025").text
-
-  state_tests = doc.css("div.container.ddf6f:nth-child(2) div.d3a4d table.e1fd0._4545b:nth-child(13) tbody:nth-child(2) tr:nth-child(1) td:nth-child(6) > span.e0025").text
-
-  puts "#{state_date}. Total tests = #{state_tests}."
+  def self.scrap_table(url)
+    doc = Nokogiri::HTML(URI.open(url))
+    data = []
+    doc.css("table tbody tr").each do |tr|
+      row = {}
+      tr.search('td').each do |td|
+        label, value = td.search('span')
+        row[label.text] = value.text
+      end
+      data << row
+    end
+    return data
+  end
 
 end
-end
-#end

@@ -1,10 +1,15 @@
 class CoronaTestCounter::CLI
+
+attr_accessor :muted, :grn, :blu, :mag, :cyn, :white
+
   @@muted = "\e[1;31m"
   @@grn = "\e[1;32m"
   @@blu = "\e[1;34m"
   @@mag = "\e[1;35m"
   @@cyn = "\e[1;36m"
   @@white = "\e[0m"
+
+  def initialize
 
   def call
     puts "\n#{@@grn}Welcome to the Covid State Test Counter#{@@white}\n"
@@ -19,11 +24,11 @@ class CoronaTestCounter::CLI
   end
 
   def get_available_states
-      @states = Corona::Each_State.states
+      @states = CoronaTestCounter::EachState.states
   end
 
   def list_states
-    puts 'Choose a state to see the daily test counts.'
+    puts "\n#{@@mag}Choose a state to see the daily test counts#{@@white}\n"
     @states.each.with_index(1) do |state, index|
       puts "#{state[2]}: #{state[0]}"
     end
@@ -32,20 +37,20 @@ class CoronaTestCounter::CLI
   def get_user_state
     puts "Please input the state abbreviation you would like to review."
     chosen_state = gets.strip
-    show_data_for(chosen_state) if valid_input(chosen_state)
+    show_state_test_viral(chosen_state) if valid_input(chosen_state)
     end
   end
 
-  def valid_input(input)
+  def valid_input(chosen_state)
     codes = @states.map { |code| code[2] }
-    codes.include?(input)
+    codes.include?(chosen_state)
   end
 
-  def show_state_test_viral(chosen_month)
-    state = Corona::State.get_state_url(chosen_month)
+  def show_state_test_viral(chosen_state)
+    state = CoronaTestCounter::EachState.get_state_url(chosen_state)
     url = "https://covidtracking.com#{state[1]}/tests-viral"
-    puts url
-    rows = Corona::Scraper.scrap_table(url)
+    #puts url
+    rows = CoronaTestCounter::Scraper.scrap_table(url)
     puts "#{@@grn}Data For #{state[0]} state is following#{@@white}"
     rows.each_with_index do |row, index|
       current = row

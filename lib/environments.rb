@@ -1,7 +1,8 @@
 require_relative "./corona_test_counter/version"
 require_relative "./corona_test_counter/cli"
 require_relative "./corona_test_counter/scraper"
-#require_relative "./eden_events/version"
+require_relative "./corona_test_counter/each_state"
+
 
 require 'pry'
 require 'nokogiri'
