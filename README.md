@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Step 1:
+
+Type:  "bin/corona_counter" into the console.
+
+Step 2:
+
+The CLI application will ask you to enter the 2 capital letters abbreviation for the state you wish to receive the recent daily covid counts.
+
+Step 3: You can scroll up to see the daily variances in changes daily for your selected state or enter a new state abbreviation. If you do not wish to view another state, you can type "exit".
+
 
 ## Development
 
